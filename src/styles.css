@@ -449,33 +449,31 @@ img {
   padding: 1.2cqw 1.4cqw;
 }
 
-/* Texte en graisse ultra-légère, fine et nette (sans aucun effet gras) */
+/* Texte du bloc À Propos (conservation du ratio cqw pour petit écran) */
 .accueil-apropos-texte {
   font-family: 'Open Sans', var(--texte);
   font-weight: 300;
-  font-size: clamp(10px, 1.35cqw, 18px);
-  line-height: 1.5;
+  font-size: 1.4cqw;
+  line-height: 1.6;
   color: #ffffff;
   margin: 0;
-  letter-spacing: 0;
+  letter-spacing: 0.01em;
   text-shadow: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .accueil-apropos-texte p + p {
   margin-top: 0.8cqw;
 }
 
-/* Coins de cadrage ultra-fins (1px) et simples sur tous les écrans */
+/* Coins du cadre : simples et fins (1.5px) */
 .coin-haut-droit {
   position: absolute;
   top: 0;
   right: 0;
   width: 20%;
   height: 35%;
-  border-top: 1px solid #ffffff;
-  border-right: 1px solid #ffffff;
+  border-top: 1.5px solid #ffffff;
+  border-right: 1.5px solid #ffffff;
 }
 
 .coin-bas-gauche {
@@ -484,17 +482,17 @@ img {
   left: 0;
   width: 20%;
   height: 35%;
-  border-bottom: 1px solid #ffffff;
-  border-left: 1px solid #ffffff;
+  border-bottom: 1.5px solid #ffffff;
+  border-left: 1.5px solid #ffffff;
 }
 
-/* Barre orange ultra-fine (1px) en bas du cadre */
+/* Barre orange fine (1.5px) en bas du cadre */
 .barre-orange-bas {
   position: absolute;
   bottom: 0;
   left: 24%;
   width: 50%;
-  height: 1px;
+  height: 1.5px;
   background: var(--orange);
 }
 

@@ -26,11 +26,17 @@ body {
   background: #fff;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
 a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
+img {
+  display: block;
+  max-width: 100%;
+  image-rendering: -webkit-optimize-contrast;
+}
 
 .conteneur {
   width: 100%;
@@ -69,9 +75,7 @@ img { display: block; max-width: 100%; }
 
 .marque-lien {
   display: inline-flex;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.marque-lien:hover { transform: rotate(-4deg) scale(1.06); }
 
 .marque .logo { height: 42px; width: auto; transition: height 0.3s ease; }
 .entete--reduite .marque .logo { height: 34px; }
@@ -108,13 +112,6 @@ img { display: block; max-width: 100%; }
 
 .liens li {
   position: relative;
-  animation: apparition 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
-  animation-delay: calc(var(--i, 0) * 0.06s);
-}
-
-@keyframes apparition {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .liens a {
@@ -125,10 +122,10 @@ img { display: block; max-width: 100%; }
   font-size: 15px;
   color: var(--encre);
   padding: 4px 2px;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: color 0.25s ease;
 }
 
-.liens a:hover { color: var(--blue); transform: translateY(-2px); }
+.liens a:hover { color: var(--blue); }
 .liens a.actif { color: var(--navy); font-weight: 700; }
 
 .bouton-contact {
@@ -143,36 +140,17 @@ img { display: block; max-width: 100%; }
   padding: 11px 26px;
   border-radius: 999px;
   white-space: nowrap;
-  box-shadow: 0 8px 20px -8px rgba(244, 144, 30, 0.7);
-  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  animation: pulsation 2.6s ease-in-out infinite;
+  box-shadow: 0 4px 12px rgba(244, 144, 30, 0.4);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .bouton-contact span { position: relative; z-index: 1; }
 
-.bouton-contact::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-  transform: translateX(-120%);
-  transition: transform 0.6s ease;
-}
-
 .bouton-contact:hover {
   background: var(--orange-fonce);
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 14px 26px -10px rgba(233, 128, 12, 0.8);
-  animation-play-state: paused;
+  box-shadow: 0 6px 16px rgba(233, 128, 12, 0.6);
 }
-
-.bouton-contact:hover::before { transform: translateX(120%); }
-.bouton-contact:active { transform: translateY(-1px) scale(0.98); }
-
-@keyframes pulsation {
-  0%, 100% { box-shadow: 0 8px 20px -8px rgba(244, 144, 30, 0.7); }
-  50% { box-shadow: 0 8px 26px -6px rgba(244, 144, 30, 0.95); }
-}
+.bouton-contact:active { opacity: 0.9; }
 
 .contact-mobile { display: none; }
 
@@ -413,10 +391,8 @@ img { display: block; max-width: 100%; }
 }
 .rt-infoline__texte a:hover { color: var(--blue); text-decoration: underline; }
 
-/* ---------------------------------------------------------- survol des tranches d'image */
+/* ---------------------------------------------------------- survol des tranches d'image (statique, pas de zoom floutant) */
 .rt-slice1, .rt-slice4 { overflow: hidden; }
-.rt-slice1 img, .rt-slice4 img { transition: transform 0.5s ease; }
-.rt-slice1:hover img, .rt-slice4:hover img { transform: scale(1.012); }
 
 /* ---------------------------------------------------------- bouton retour en haut */
 .bouton-haut {
@@ -436,15 +412,91 @@ img { display: block; max-width: 100%; }
   cursor: pointer;
   box-shadow: 0 10px 24px -8px rgba(24, 42, 122, 0.55);
   opacity: 0;
-  transform: translateY(16px) scale(0.85);
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+  transition: opacity 0.3s ease, background 0.2s ease;
 }
 .bouton-haut svg { width: 22px; height: 22px; }
-.bouton-haut--visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-.bouton-haut:hover { background: var(--blue); transform: translateY(-3px) scale(1.06); }
-.bouton-haut:active { transform: translateY(0) scale(0.96); }
+.bouton-haut--visible { opacity: 1; pointer-events: auto; }
+.bouton-haut:hover { background: var(--blue); }
 
 @media (max-width: 600px) {
   .bouton-haut { right: 14px; bottom: 14px; width: 42px; height: 42px; }
 }
+
+/* ---------------------------------------------------------- tranche 1 Accueil : bloc À Propos reconstruit */
+.accueil-slice1 {
+  position: relative;
+  container-type: inline-size;
+  line-height: 0;
+  overflow: hidden;
+}
+.accueil-slice1 img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.accueil-apropos-bloc {
+  position: absolute;
+  left: 5.6%;
+  top: 21%;
+  width: 44.5%;
+  z-index: 2;
+}
+
+.accueil-cadre {
+  position: relative;
+  padding: 1.2cqw 1.4cqw;
+}
+
+/* Texte en graisse normale / légère (NON GRAS) & ultra net sans flou */
+.accueil-apropos-texte {
+  font-family: 'Open Sans', var(--texte);
+  font-weight: 300;
+  font-size: 1.4cqw;
+  line-height: 1.6;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.01em;
+  text-shadow: none;
+}
+
+.accueil-apropos-texte p + p {
+  margin-top: 0.8cqw;
+}
+
+/* Coins de cadrage bien visibles et nets (rendu vectoriel + drop-shadow net) */
+.coin-haut-droit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 35%;
+  border-top: 3px solid #ffffff;
+  border-right: 3px solid #ffffff;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.75));
+}
+
+.coin-bas-gauche {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20%;
+  height: 35%;
+  border-bottom: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.75));
+}
+
+/* Barre orange en bas du cadre */
+.barre-orange-bas {
+  position: absolute;
+  bottom: 0;
+  left: 24%;
+  width: 50%;
+  height: 4px;
+  background: var(--orange);
+  border-radius: 2px;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5));
+}
+

@@ -465,15 +465,15 @@ img {
   margin-top: 0.8cqw;
 }
 
-/* Coins du cadre : simples et fins (1.5px) */
+/* Coins du cadre : très fins et proportionnels sur tous les écrans */
 .coin-haut-droit {
   position: absolute;
   top: 0;
   right: 0;
   width: 20%;
   height: 35%;
-  border-top: 1.5px solid #ffffff;
-  border-right: 1.5px solid #ffffff;
+  border-top: clamp(0.75px, 0.1cqw, 1.2px) solid #ffffff;
+  border-right: clamp(0.75px, 0.1cqw, 1.2px) solid #ffffff;
 }
 
 .coin-bas-gauche {
@@ -482,17 +482,45 @@ img {
   left: 0;
   width: 20%;
   height: 35%;
-  border-bottom: 1.5px solid #ffffff;
-  border-left: 1.5px solid #ffffff;
+  border-bottom: clamp(0.75px, 0.1cqw, 1.2px) solid #ffffff;
+  border-left: clamp(0.75px, 0.1cqw, 1.2px) solid #ffffff;
 }
 
-/* Barre orange fine (1.5px) en bas du cadre */
+/* Barre orange fine en bas du cadre */
 .barre-orange-bas {
   position: absolute;
   bottom: 0;
   left: 24%;
   width: 50%;
-  height: 1.5px;
+  height: clamp(0.75px, 0.12cqw, 1.5px);
   background: var(--orange);
+}
+
+@media (max-width: 768px) {
+  .coin-haut-droit {
+    border-top-width: 1px;
+    border-right-width: 1px;
+  }
+  .coin-bas-gauche {
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+  }
+  .barre-orange-bas {
+    height: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .coin-haut-droit {
+    border-top-width: 0.75px;
+    border-right-width: 0.75px;
+  }
+  .coin-bas-gauche {
+    border-bottom-width: 0.75px;
+    border-left-width: 0.75px;
+  }
+  .barre-orange-bas {
+    height: 0.75px;
+  }
 }
 

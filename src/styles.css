@@ -465,16 +465,15 @@ img {
   margin-top: 0.8cqw;
 }
 
-/* Coins de cadrage bien visibles et nets (rendu vectoriel + drop-shadow net) */
+/* Coins de cadrage fins, nets et simples */
 .coin-haut-droit {
   position: absolute;
   top: 0;
   right: 0;
   width: 20%;
   height: 35%;
-  border-top: 3px solid #ffffff;
-  border-right: 3px solid #ffffff;
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.75));
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
 }
 
 .coin-bas-gauche {
@@ -483,20 +482,18 @@ img {
   left: 0;
   width: 20%;
   height: 35%;
-  border-bottom: 3px solid #ffffff;
-  border-left: 3px solid #ffffff;
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.75));
+  border-bottom: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
 }
 
-/* Barre orange en bas du cadre */
+/* Barre orange fine en bas du cadre */
 .barre-orange-bas {
   position: absolute;
   bottom: 0;
   left: 24%;
   width: 50%;
-  height: 4px;
+  height: 2px;
   background: var(--orange);
-  border-radius: 2px;
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5));
+  border-radius: 1px;
 }
 
